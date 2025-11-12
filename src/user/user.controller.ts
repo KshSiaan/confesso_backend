@@ -16,10 +16,6 @@ export class UserController {
     async getUsers():Promise<any>{
         return this.UserService.getUsers();
     }
-    @Get(':id')
-    getUser(@Param('id') id: string): UserType|undefined {
-        return this.UserService.getUser(id);
-    }
     @Post()
     createUser(@Body()data:CreateUserData){
         return this.UserService.createUser(data)
