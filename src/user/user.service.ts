@@ -1,6 +1,6 @@
 import { ConflictException, Injectable, ServiceUnavailableException, UnprocessableEntityException } from '@nestjs/common';
 
-import user_dataset from 'src/lib/data/users';
+
 import { supabase } from 'src/lib/db';
 import { CreateUserData } from './user.controller';
 import * as bcrypt from "bcrypt"
@@ -103,9 +103,9 @@ async createUser(data: CreateUserData): Promise<any> {
     };
 }
 
-    getUser(id:string){
-        return user_dataset.find((x)=>{
-            return x.id === id;
-        })
-    }
+    // getUser(id:string){
+    //     return user_dataset.find((x)=>{
+    //         return x.id === id;
+    //     })
+    // }
 }
