@@ -1,6 +1,6 @@
-import { Controller, Get, Headers, Patch, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Headers, Patch, UseGuards } from '@nestjs/common';
 import { MeService } from './me.service';
-import { AuthGuard } from 'src/auth/auth.guard';
+import type UserType from 'src/lib/types/user';
 
 @Controller('me')
 export class MeController {
@@ -11,8 +11,9 @@ export class MeController {
     return await this.MeService.getMe(token);
   }
   @Patch()
-  @UseGuards(AuthGuard)
-  updateMe() {
-    return 'Update me hit!';
+  async updateMe(@Headers('authorization') authHeader: string,@Body() body: UserType,) {
+    const token = authHeader?.split(' ')[1];
+    
+    return await this.MeService.updateMe(token,body);
   }
 }

@@ -26,4 +26,3 @@ export class UserController {
     return await this.UserService.getUser(id);
   }
 }
-// :Promise<UserType>
