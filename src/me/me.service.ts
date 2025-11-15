@@ -87,7 +87,7 @@ const { data: dbData, error: err } = await supabase
     address: body.address,
   }).eq("id",userId).select("*").single();
 
-  if (err) {
+  if (err) {0.
     throw new UnprocessableEntityException(err.message)
   }
     console.log(dbData);
