@@ -21,7 +21,10 @@ export class PostController {
 
   @Get()
   async getPosts() {
-    const { data, error } = await supabase.from('post').select('*').eq("isPrivate",false);
+    const { data, error } = await supabase
+      .from('post')
+      .select('*')
+      .eq('isPrivate', false);
 
     if (error) {
       throw new BadRequestException(error.message);
@@ -53,7 +56,7 @@ export class PostController {
   @Post()
   async createPost(
     @Headers('authorization') authHeader: string,
-    @Body() body: Pick<PostType, 'title' | 'content'|"isPrivate">,
+    @Body() body: Pick<PostType, 'title' | 'content' | 'isPrivate'>,
   ) {
     const token = authHeader?.split(' ')[1];
     return this.PostService.createPost(token, body);
@@ -62,7 +65,7 @@ export class PostController {
   @UseGuards(AuthGuard)
   async updatePost(
     @Param('id') id: string,
-    @Body() body: Pick<PostType, 'title' | 'content'|"isPrivate">,
+    @Body() body: Pick<PostType, 'title' | 'content' | 'isPrivate'>,
     @Headers('authorization') authHeader: string,
   ) {
     const token = authHeader?.split(' ')[1];
