@@ -110,7 +110,7 @@ export class MeService {
     };
   }
 
-  async deleteMe(token:string){
+  async deleteMe(token: string) {
     let verifiedToken: any;
     if (!token) {
       throw new UnauthorizedException('Invalid token format');
@@ -140,15 +140,20 @@ export class MeService {
     if (data.length <= 0 || !data[0].password) {
       throw new UnauthorizedException('Unauthorized');
     }
-    const {data:dbData,error:err} = await supabase.from("user").delete().eq("id",userId).select("*").single();
+    const { data: dbData, error: err } = await supabase
+      .from('user')
+      .delete()
+      .eq('id', userId)
+      .select('*')
+      .single();
     if (err) {
       throw new ConflictException(err.message);
     }
-    const {password,...dataset} = dbData;
+    const { password, ...dataset } = dbData;
     return {
-      ok:true,
-      message:`${dataset.name} profile has been deleted`,
-      user:dataset
-    }
+      ok: true,
+      message: `${dataset.name} profile has been deleted`,
+      user: dataset,
+    };
   }
 }
