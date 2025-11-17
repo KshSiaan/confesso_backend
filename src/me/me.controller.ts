@@ -28,8 +28,8 @@ export class MeController {
     return await this.MeService.updateMe(token, body);
   }
   @Delete()
-  async deleteMe(@Headers('authorization') authHeader: string){
-        const token = authHeader?.split(' ')[1];
-    return this.MeService.deleteMe(token)
+  async deleteMe(@Headers('authorization') authHeader: string) {
+    const token = authHeader?.split(' ')[1];
+    return this.MeService.deleteMe(token);
   }
 }
